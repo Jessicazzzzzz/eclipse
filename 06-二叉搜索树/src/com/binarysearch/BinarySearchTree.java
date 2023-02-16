@@ -1,5 +1,7 @@
 package com.binarysearch;
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import printer.BinaryTreeInfo;
 
@@ -108,6 +110,54 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 		visitor.stop = visitor.visit(node.element);
 		preOrderTraverse(node.left, visitor);
 		preOrderTraverse(node.right, visitor);
+		 
+	 }
+//	 中序遍历
+	 public void inorder(Visitor<E> visitor) {
+		 if(visitor==null) return;
+		 inorderTraverse(root, visitor);
+		 
+	 }
+	 private void inorderTraverse(Node<E> node,Visitor<E> visitor) {
+//		 node 为空 ,或者记录点为true 就停止递归的调用
+		 if(node == null || visitor.stop) return;
+		 inorderTraverse(node.left, visitor);
+		 if(visitor.stop)return;
+		 visitor.stop = visitor.visit(node.element);
+		 inorderTraverse(node.right, visitor);
+	 }
+//	 后序遍历
+	 public void pastOrder(Visitor<E> visitor) {
+		 if(visitor==null) return;
+		 
+	 }
+	 public void pastOrderTraverse(Node<E> node,Visitor<E> visitor) {
+		 if(node==null|| visitor.stop) return;
+		 pastOrderTraverse(node.left, visitor);
+		 pastOrderTraverse(node.right, visitor);
+		 visitor.stop = visitor.visit(node.element);
+	 }
+//	 层级遍历
+	 public void levelOrder(Visitor<E> visitor) {
+		 levelOrderTraverse(root, visitor);
+	 }
+	 private void levelOrderTraverse(Node<E> node,Visitor<E> visitor) {
+		 if(node==null || visitor==null) return;
+		 Queue<Node<E>> stack = new LinkedList<>();
+		 stack.offer(node);
+		 while(!stack.isEmpty()) {
+			Node<E> popupNode= stack.poll();
+			 if(visitor.stop)return;
+			 visitor.stop = visitor.visit(popupNode.element);
+			 if(popupNode.left !=null) {
+				 stack.offer(popupNode.left);
+			 }
+			 if(popupNode.right !=null) {
+				 stack.offer(popupNode.right);
+			 }
+			 
+			 
+		 }
 		 
 	 }
 	 

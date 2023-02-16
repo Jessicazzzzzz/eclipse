@@ -34,6 +34,27 @@ public class Main {
 			return element==3?true:false;
 		}
 	});
+	System.out.println();
+	bst.inorder(new Visitor<Integer>() {
+
+		@Override
+		boolean visit(Integer element) {
+			// TODO Auto-generated method stub
+			System.out.print("_"+element);
+			return false;
+		}
+	});
+	System.out.println();
+	bst.levelOrder(new Visitor<Integer>() {
+
+		@Override
+		boolean visit(Integer element) {
+			// TODO Auto-generated method stub
+			System.out.print(element+"_");
+			return false;
+		}
+		
+	});
 	
 //	String string = BinaryTrees.printString(bst);
 //	Files.writeToFile("/Users/jessicazhu/Desktop/test.txt",string , false);
